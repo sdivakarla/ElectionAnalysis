@@ -13,6 +13,14 @@ total_votes = 0
 
 #declare variable for candidate names
 candidate_options = []
+#declare empty dictionary for candidate votes
+candidate_votes = {}
+#Declare string for winning candidate
+winning_candidate = ""
+#declare variable for winning count
+winning_count = 0
+#Declare variable for winning percentage
+winning_percentage = 0
 
 
 #Open the election results and read the file
@@ -40,10 +48,46 @@ with open(file_to_load) as election_data:
 
 #Add the candidate name to the candidate list
         if candidate_name not in candidate_options: 
+                #Add candidate name to the candidate list
                 candidate_options.append(candidate_name)
-        
+
+                #Begin tracking candidate's vote count
+                candidate_votes[candidate_name] = 0
+
+        #Add a vote to that condidate's count
+        candidate_votes[candidate_name] +=1
+
+#Iterate through the candidate list
+for candidate_name in candidate_votes:
+        #Retrieve vote count of a candidate
+        votes = candidate_votes[candidate_name]
+        #Calculate vote percentage        
+        vote_percentage = float(votes)/ float(total_votes) * 100
+        # Print the candindate name and percentage of vote
+        # print(f'{candidate_name}: received {vote_percentage:.1f}% of the vote.')
+
+        if (votes> winning_count) and (vote_percentage > winning_percentage):
+                #If true then set winning_count = votes and winning_percentage = vote_percentage
+                winning_count = votes
+                winning_percentage = vote_percentage
+                #And set winning_candidate equal to candidate name
+                winning_candidate = candidate_name
+
+        #To do: Print out winning candidate, vote count and percentage to terminal
+        print(f"{candidate_name}: {vote_percentage:.1f}% ({votes:,})\n")
+
+winning_candidate_summary = (
+        f"---------------------\n"
+        f"Winner: {winning_candidate}\n"
+        f"Winning Vote Count: {winning_count:,}\n"
+        f"Winning Percentage: {winning_percentage:1f}%\n"
+        f"----------------------\n")
+print(winning_candidate_summary)
+#print(vote_percentage)
 #Print the candidate List
-print(candidate_options)
+#print(candidate_votes)
+
+
 
 #Close File (not needed when using with funtion)
 #election_data.close()
