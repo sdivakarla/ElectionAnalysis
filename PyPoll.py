@@ -27,21 +27,18 @@ winning_percentage = 0
 with open(file_to_load) as election_data:
 
     #to do: Perform analysis (read and analyze data here.)
-   # print(election_data)
+
     #Read the file object with the reader function
     file_reader = csv.reader(election_data)
 
     #Print the header row
     headers = next(file_reader)
-    #print(headers)
 
-    #Print each row in the csv file
     for row in file_reader:
         #2. Add to the total vote count
         total_votes +=1
 
-#3. Print the total votes
-#print(total_votes)
+
 
 # Print the candidate name from each row
         candidate_name = row[2]
@@ -66,6 +63,8 @@ with open (file_to_save, "w") as txt_file:
                 f"----------------------\n"
                 f"Total Votes: {total_votes:,}\n"
                 f"----------------------\n")
+        
+        #3. Print the total votes
         print(election_results, end="")
 
         #2. A complete list of candidates who received votes.
@@ -91,10 +90,6 @@ with open (file_to_save, "w") as txt_file:
                         #And set winning_candidate equal to candidate name
                         winning_candidate = candidate_name
 
-                #To do: Print out winning candidate, vote count and percentage to terminal
-                #print(f"{candidate_name}: {vote_percentage:.1f}% ({votes:,})\n")
-
-
         #5. The winner of the election based on the popular vote. 
         winning_candidate_summary = (
                 f"---------------------\n"
@@ -103,9 +98,6 @@ with open (file_to_save, "w") as txt_file:
                 f"Winning Percentage: {winning_percentage:1f}%\n"
                 f"----------------------\n")
         print(winning_candidate_summary)
-        #print(vote_percentage)
-        #Print the candidate List
-        #print(candidate_votes)
 
         #Save the final vote count to the text file
         txt_file.write(winning_candidate_summary)        
@@ -114,13 +106,3 @@ with open (file_to_save, "w") as txt_file:
 #election_data.close()
 
 #Use the open statement to open the file as a text file
-
-
-#Write some data to the file
-# outfile.write("Hello World")
-# outfile.close()
-#Write three counties to the file
-    # txt_file.write("Arapahoe, ")
-    # txt_file.write("Denver, ")
-    # txt_file.write("Jefferson")
-    #xt_file.write("Counties in the Election\n----------------\nArapahoe\nDenver\nJefferson")
